@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="css/styles.css">
+        <script src="js/elementGen.js"></script>
+        <script>
+            window.onload = function() {                
+                updateAllData();
+                connectWebSocket();
+            };
+        </script>
+    </head>
+    <body>
+        <h1>LiveEstimatedPositions</h1>
+        <div>
+            <span class="header">Position</span>
+            <span class="header">Position Change</span>
+            <span class="header">Driver Name</span>
+            <span class="header">Time (in Heat)</span>
+        </div>
+        <div id="LiveEstimatedPositionResponseList">
+        </div>
+        <template id="LiveEstimatedPositions">
+            <div id="LiveEstimatedPosition">
+                <span id="Position">Position</span>
+                <span id="PositionChange">PositionChange</span>
+                <span id="DriverName">DriverName</span>
+                <span id="BestSeedingResult">BestSeedingResult</span>
+            </div>
+        </template>
+        
+        <h1>LiveRaceEntryResponse</h1>
+        <div id="LiveRaceEntryResponseList">
+        </div>
+        <template id="LiveRaceEntries">
+            <div id="LiveRaceEntries">
+                <span id="Number">Number</span>
+                <span id="Position">Position</span>
+                <span id="LiveEstimatedQualifyingPosition">LiveEstimatedQualifyingPosition</span>
+                <span id="DriverName">DriverName</span>
+                <span id="Laps">Laps</span>
+                <span id="FastestLap">FastestLap</span>
+                <span id="Top3Consecutive">Top3Consecutive</span>
+                <div id="LiveRaceEntryLaps">
+                </div>                
+            </div>
+        </template>
+        <template id="LiveRaceEntryLaps">
+            <div id="LiveRaceEntryLaps">
+                <span id="LapTimeSeconds">LapTimeSeconds</span>
+            </div>
+        </template>
+    </body>
+</html>

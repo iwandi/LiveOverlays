@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'Call of Ops Duty II';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Call of Ops Duty II'), url('fonts/Call of Ops Duty II.otf');
+  }
+
+body {
+    font-family: 'Call of Ops Duty II', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+.template {
+  display: none;
+}
+
+.IsInRace {
+    color: green;
+}
+
+.ValueChangePositive {
+    color: green;
+}
+
+.ValueChangeNegative {
+    color: red;
+}

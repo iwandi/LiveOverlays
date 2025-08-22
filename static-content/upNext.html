@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="css/styles.css">
+        <script src="js/elementGen.js"></script>
+        <script>
+            window.onload = function() {                
+                updateAllData();
+                connectWebSocket();
+            };
+        </script>
+    </head>
+    <body>
+        <div id="upNextContainer">
+            <div class="headerPill"><h2>Event Name</h2></div>
+            <div id="upClassContainer" class="headerPill">
+                <img class="imgleft" src="img/multigp-on-dark-150px.png" height="50px">
+                <h3>Open</h3>
+                <img class="imgright" src="img/eurochamps-on-white-150px.png" height="50px">
+            </div>
+            <div class="headerPill"> heat name</div>
+            <div id="LiveRaceEntryResponseList">
+            </div>
+        </div>        
+        <template id="LiveRaceEntries">
+            <div id="LiveRaceEntries" class="contentPill">
+                <span id="DriverName">DriverName</span>
+                <span id="Position">Position</span>
+                <span id="Top3Consecutive">Top3Consecutive</span>
+            </div>
+        </template>
+    </body>
+</html>

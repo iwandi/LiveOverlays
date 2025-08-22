@@ -5,6 +5,16 @@
     src: local('Call of Ops Duty II'), url('fonts/Call of Ops Duty II.otf');
   }
 
+:root {
+    --mgp-red: #8d181bff;
+    --euchamps-blue: #004494ff;
+    --euchamps-yelow: #ffd617ff;
+    --text-bright: #ffffff;
+    --text-dark: #000000;
+    --color-positive: #12a512;
+    --color-negative: #b91c1c;
+}
+
 body {
     font-family: 'Call of Ops Duty II', sans-serif;
     background-color: #f0f0f0;
@@ -18,13 +28,82 @@ body {
 }
 
 .IsInRace {
-    color: green;
+    color: rgb(64, 64, 184);
 }
 
 .ValueChangePositive {
-    color: green;
+    color: var(--color-positive);
 }
 
 .ValueChangeNegative {
-    color: red;
+    color: var(--color-negative);
 }
+
+.headerPill {
+    padding: 5px 10px 5px 10px;
+    margin: 5px 0px 5px 0px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+}
+
+.headerPill h2 {
+    flex: 1;               /* take full width */
+    text-align: center;    /* center the text inside */
+    margin: 0;             /* remove default h2 margin */
+  }
+
+.contentPill {
+    padding: 5px 10px 5px 10px;
+    margin: 5px 0px 5px 0px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+}
+
+#upNextContainer {
+    position: fixed;
+    bottom: 100px;       /* distance from bottom */
+    left: 50%;           /* center horizontally */
+    transform: translateX(-50%); /* adjust to true center */
+    width: 1000px;
+    height: 400px;
+}
+
+#upClassContainer {
+    background: linear-gradient(
+        to right,
+        var(--mgp-red) 30%,   /* start red after 10% */
+        var(--euchamps-blue) 70%   /* end blue before 90% */
+    );
+    color: var(--text-bright);
+    justify-content: space-between;
+}
+
+.imgleft {
+    float: left;
+    margin-right: 25px;
+}
+
+.imgright {    
+    float: right;
+    margin-left: 25px;
+}
+
+.LiveRaceEntry {
+    display: flex;
+    justify-content: space-between; /* distribute items horizontally */
+    align-items: center;
+    padding: 5px 10px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 4px;
+    background: #f8f8f8;
+  }
+
+  .LiveRaceEntry span {
+    flex: 1;             /* optional: make all spans take equal width */
+    text-align: center;  /* center text in each span */
+  }

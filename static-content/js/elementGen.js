@@ -270,11 +270,29 @@ function applyData(elementData, elementId, element, nullValue = "") {
     dataElement.textContent = elementData;
 }
 
+function formatTime(time, digits = 3) {
+    if(time === undefined || time === null)
+        return "---";
+    const formatted = parseFloat(time).toFixed(digits);
+    return formatted.padStart(digits, '0');
+}
+
 function applyVisible(visible, elementId, element) {
     if(visible === undefined)
         visible = false;
 
     var dataElement = element.querySelector("#" + elementId);
+    if(dataElement === null || dataElement === undefined)
+        return;
+
+    dataElement.style.display = visible ? "" : "none";
+}
+
+function applyVisibleClass(visible, className) {
+    if(visible === undefined)
+        visible = false;
+
+    var dataElement = document.querySelector("." + className);
     if(dataElement === null || dataElement === undefined)
         return;
 
@@ -295,8 +313,18 @@ function updateLiveRaceStateResponse(data) {
     applyData(data.RaceName, "RaceName", root);
     applyData(data.RaceClassInformation, "RaceClassInformation", root);
     applyData(data.RoundLetterTypeOrderNumberDisplay, "RoundLetterTypeOrderNumberDisplay", root);
+
+    applyVisibleClass(isRace, "IsRenableInRaceace");
+    applyVisibleClass(isQualifying, "enableInQualifying");
 }
 
+function sortByPos(lhs, rhs) {
+    const lhsGrid = lhs.Position;
+    const rhsGrid = rhs.Position;
+    return lhsGrid - rhsGrid;
+}
+
+var alwaysSortByGrid = false;
 function updateLiveRaceEntryResponse(data) {   
     const root = document.getElementById("LiveRaceEntryResponseList");
     if(root === null || root === undefined)
@@ -315,7 +343,14 @@ function updateLiveRaceEntryResponse(data) {
         return;
 
     var entires = data.LiveRaceEntries;
-    entires = entires.sort(sortByGrid);
+    var applySortByGrid = !isRace;
+    if(alwaysSortByGrid)
+        applySortByGrid = true;
+
+    if(applySortByGrid)
+        entires = entires.sort(sortByGrid);
+    else
+        entires = entires.sort(sortByPos);
 
     for(const entrie of entires) {                   
         const clones = template.content.cloneNode(true);
@@ -325,13 +360,18 @@ function updateLiveRaceEntryResponse(data) {
 
         applyVisible(isRace, "IsRace", element);
         applyVisible(isQualifying, "IsQualifying", element);
+        applyVisible(isQualifying, "LiveEstimatedQualifyingPosition", element);
+        applyVisible(isQualifying, "Top3Consecutive", element);
+        applyVisible(isRace, "Position", element);
+        applyVisible(isRace, "Number", element);
 
         applyData(entrie.DriverName, "DriverName", element);
         applyData(entrie.Position, "Position", element);
+        applyData(entrie.Number, "Number", element);
         applyData(entrie.FrequencyName, "FrequencyName", element);
-        applyData(entrie.SortTimeBehindPositionAbove, "SortTimeBehindPositionAbove", element);
+        applyData(formatTime(entrie.SortTimeBehindPositionAbove), "SortTimeBehindPositionAbove", element);
         applyData(entrie.LiveEstimatedQualifyingPosition, "LiveEstimatedQualifyingPosition", element);
-        applyData(entrie.Top3Consecutive, "Top3Consecutive", element);
+        applyData(formatTime(entrie.Top3Consecutive), "Top3Consecutive", element);
 
         var pilot = getPilot(entrie.DriverLID, entrie.DriverName, entrie.DriverName);
         applyData(pilot?.nationality, "Nationality", element, "---");
@@ -354,7 +394,7 @@ function updateLiveRaceEntryResponse(data) {
                     continue;
                 const elementLap = clones.children[0];
 
-                applyData(lap.LapTimeSeconds, "LapTimeSeconds", elementLap);
+                applyData(formatTime(lap.LapTimeSeconds, 2), "LapTimeSeconds", elementLap);
                 lapsRoot.appendChild(elementLap);
             }
         }
@@ -417,7 +457,7 @@ function updateLiveEstimatedPositionResponse(data) {
 
         applyData(entrie.DriverName, "DriverName", element);
         applyData(entrie.Position, "Position", element);
-        applyData(entrie.BestSeedingResult, "BestSeedingResult", element);
+        applyData(formatTime(entrie.BestSeedingResult), "BestSeedingResult", element);    
 
         var pilot = getPilot(entrie.DriverLID, entrie.DriverName, entrie.DriverName);
         applyData(pilot?.nationality, "Nationality", element, "---");

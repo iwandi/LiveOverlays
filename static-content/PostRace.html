@@ -40,7 +40,20 @@
                     <td id="BestSeedingResult">BestSeedingResult</td>               
                 </tr>
             </template>
-            <table id="LiveEstimatedPositionResponseList">
+            <table id="LiveEstimatedPositionResponseList" class="enableInQualifying">
+            </table>
+
+            <template id="LiveRaceEntries">
+                <tr id="LiveRaceEntries">
+                    <td id="Nationality" style="background-image: linear-gradient(to right, rgba(255,255,255,0) 5%, var(--backgroundColor) 100%), url('img/flags/us.svg');">USA</td>
+                    <td style="text-align: left;">
+                        <span id="FullName">FullName</span>
+                    </td>
+                    <td id="Position">Position</td>
+                    <td id="SortTimeBehindPositionAbove">SortTimeBehindPositionAbove</td>               
+                </tr>
+            </template>
+            <table id="LiveRaceEntryResponseList" class="enableInRace">
             </table>
         </div>
     </body>

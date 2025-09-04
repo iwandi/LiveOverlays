@@ -20,7 +20,7 @@
     --bgEuroBlue: linear-gradient(to right, var(--colorEuroBlue) 0%, var(--colorEuroBlueLight) 20%, var(--colorEuroBlue) 100%);
     --borderEuroBlue: 2px solid, var(--colorDark);
     --shadowEuroBlue: 1px 2px 4px var(--colorDarkLight);
-    --bgMGPandEuro: linear-gradient(to right, var(--colorMGPRed) 0%, var(--colorDark) 33%, var(--colorDark) 66%, var(--colorEuroBlue) 100%);
+    --bgMGPandEuro: linear-gradient(to right, var(--colorMGPRed) 0%, var(--colorMGPRed) 33%, var(--colorDark) 45%, var(--colorDark) 55%,var(--colorEuroBlue) 66%, var(--colorEuroBlue) 100%);
     --borderMGPandEuro: 2px solid, var(--colorDark);
     --shadowMGPandEuro: 1px 2px 4px var(--colorDarkLight);
     --bgDark: linear-gradient(to right, var(--colorDark) 0%, var(--colorDarkLight) 20%, var(--colorDark) 100%);
@@ -46,9 +46,20 @@ body {
 
 /* Logo at top */
 .logo img {
-  padding-top: 80px;
-  max-height: 150px;
+  padding-top: 50px;
+  max-height: 250px;
   height: auto;
+}
+
+.subtitle img {
+    max-height: 70px;
+    max-width: 180px;
+    height: auto;
+    width: auto;
+}
+
+.subtitle .right {
+    padding-right: 50px;
 }
 
 /* Bottom scoreboard container */

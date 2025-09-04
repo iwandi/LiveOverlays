@@ -23,6 +23,11 @@ body {
     padding: 20px;
 }
 
+.logo img {
+    max-width: 250px;
+    height: auto;
+  }
+
 .template {
   display: none;
 }

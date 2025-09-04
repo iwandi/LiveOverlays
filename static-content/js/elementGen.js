@@ -387,7 +387,6 @@ function updateLiveEstimatedPositionResponse(data) {
         return;
 
     var position = 0;
-    const entriesPerPage = 12;
     const pageCount = Math.ceil(data.LiveEstimatedPositions.length / entriesPerPage);
     const startPosition = entriesPerPage * (page % pageCount);
     const endPosition = startPosition + entriesPerPage;
@@ -444,7 +443,8 @@ function updateLiveEstimatedPositionResponse(data) {
 }
 
 var page = 0;
-const pageInterval = 7000; // 15 seconds
+var entriesPerPage = 12;
+var pageInterval = 7000; // 15 seconds
 function startPageTimer() {
     setInterval(() => {
         nextPage();

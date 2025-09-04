@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="css/styles.css">
+        <style>
+            #Nationality { 
+                width: 20px;
+            }
+
+            #Position {
+                width: 20px;
+            }
+        </style>
+        <script src="js/elementGen.js"></script>
+        <script>
+            entriesPerPage = 20;
+
+            window.onload = function() {                
+                updateAllData();
+                connectWebSocket();
+                startPageTimer();
+            };
+        </script>
+    </head>
+    <body>
+        <div id="LiveRaceStateResponse" class="container-mini">
+            <template id="LiveEstimatedPositionResponse">
+                <tr id="LiveEstimatedPositions">
+                    <td id="Nationality" style="background-image: linear-gradient(to right, rgba(255,255,255,0) 5%, var(--backgroundColor) 100%), url('img/flags/us.svg');">USA</td>
+                    <td style="text-align: left;">
+                        <span id="CallSign">CallSign</span>
+                    </td>
+                    <td id="Position">Position</td>
+                    <!--<td id="BestSeedingResult">BestSeedingResult</td>-->
+                </tr>
+            </template>
+            <table id="LiveEstimatedPositionResponseList">
+            </table>
+        </div>
+    </body>
+</html>

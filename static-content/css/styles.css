@@ -49,6 +49,12 @@ body {
   width: 600px;      
 }
 
+.container-mini {
+    text-align: center;
+    padding: 15px;
+    width: 250px;      
+  }
+
 .title {
   padding: 8px;
   margin-bottom: 10px;
@@ -121,8 +127,8 @@ td {
   text-align: center;
 }
 
-#Nation {
-    width: 60px;               
+#Nationality {
+    width: 40px;               
     /*height: 30px;*/              
 
     text-align: right;

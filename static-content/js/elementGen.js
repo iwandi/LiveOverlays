@@ -141,9 +141,18 @@ async function updateDataLiveRaceEntryResponse() {
 async function getData(dataFile)
 {
     // load JSON data from the specified file
-    const dataFetch = await fetch(`/data/${dataFile}.json`);
-    const data = await dataFetch.json();
-    return data;
+    var done = false;
+    while(!done) {
+        try {
+            const dataFetch = await fetch(`/data/${dataFile}.json`);
+            const data = await dataFetch.json();
+            done = true;
+            return data;
+        } catch (error) {
+            console.error(`Error fetching ${dataFile}.json:`, error);
+        }
+    }
+    return undefined;
 }
 
 async function updateData(dataFile, root)

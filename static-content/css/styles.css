@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Saira Condensed'; /* Name of the font */
+    src: url('../fonts/SairaCondensed-Regular.ttf') format('truetype'); /* Path to the font file */
+    font-weight: normal; /* Specify the font weight */
+    font-style: normal; /* Specify the font style */
+}
+
 :root {
     --colorMGPRed: #8d181bff;
     --colorEuroBlue :#004494ff;
@@ -25,7 +32,8 @@ body {
   margin: 0;
   height: 100vh;
   width: 100vw;
-  font-family: 'Call of Ops Duty II', sans-serif;
+  /*font-family: 'Call of Ops Duty II', sans-serif;*/
+  font-family: 'Saira Condensed';
   font-size: 28px;      
   background: transparent; /* Important for OBS overlay */
   display: flex;
@@ -38,7 +46,8 @@ body {
 
 /* Logo at top */
 .logo img {
-  max-width: 250px;
+  padding-top: 80px;
+  max-height: 150px;
   height: auto;
 }
 

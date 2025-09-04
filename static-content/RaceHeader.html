@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="css/styles.css">
+        <script src="js/elementGen.js"></script>
+        <style>
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+.container {
+    height: 700px;
+    width: calc(100% - 300px);   
+    margin-top: 15px;
+    margin-left: 25px; 
+    margin-right: 275px;
+}
+
+.subtitle{
+    background: linear-gradient(to right, var(--colorMGPRed) 0%, var(--colorMGPRed) 30%, var(--colorDark) 40%, var(--colorDark) 40%,var(--colorEuroBlue) 50%, var(--colorEuroBlue) 100%);
+}
+
+.subtitle span{
+    align-items: center;
+    margin: 5px 50px 5px 50px;
+    display: inline-block;
+    /*transform: translateY(-50%);*/
+}
+
+.subtitle img {
+    position: relative;
+    transform: translateY(-50%);
+}
+
+.subtitle .left, .subtitle .right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+        </style>
+        <script>
+            window.onload = function() {                
+                updateAllData();
+                connectWebSocket();
+            };
+        </script>
+    </head>
+    <body>
+        <div id="LiveRaceStateResponse" class="container">
+            <div id="header" class="subtitle">
+                <img src="img/multigp-on-dark-150px.png" alt="MultiGP Logo" class="left">
+                <span id="RaceClassInformation">RaceClassInformation</span>
+                <img src="img/multgp-open.png" alt="Openclass Logo">
+                <span>MultiGP European Championship 2025</span>
+                <img src="img/eurochamps-on-white-150px.png" alt="European Champs" class="right">
+            </div>
+        </div>
+    </body>
+</html>

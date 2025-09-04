@@ -1,114 +1,134 @@
-@font-face {
-    font-family: 'Call of Ops Duty II';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Call of Ops Duty II'), url('fonts/Call of Ops Duty II.otf');
-  }
-
 :root {
-    --mgp-red: #8d181bff;
-    --euchamps-blue: #004494ff;
-    --euchamps-yelow: #ffd617ff;
-    --text-bright: #ffffff;
-    --text-dark: #000000;
-    --color-positive: #12a512;
-    --color-negative: #b91c1c;
+    --colorMGPRed: #8d181bff;
+    --colorEuroBlue :#004494ff;
+    --colorEuroBlueLight: #005ac2ff;
+    --colorEuroYelow: #ffd617ff;
+    --colorDark: black;
+    --colorDarkLight: #222222ff;
+    
+    --fogroundColor: white;
+    --borderColor: white;
+    --backgroundColor: #004494ff;  
+
+    --bgEuroBlue: linear-gradient(to right, var(--colorEuroBlue) 0%, var(--colorEuroBlueLight) 20%, var(--colorEuroBlue) 100%);
+    --borderEuroBlue: 2px solid, var(--colorDark);
+    --shadowEuroBlue: 1px 2px 4px var(--colorDarkLight);
+    --bgMGPandEuro: linear-gradient(to right, var(--colorMGPRed) 0%, var(--colorDark) 33%, var(--colorDark) 66%, var(--colorEuroBlue) 100%);
+    --borderMGPandEuro: 2px solid, var(--colorDark);
+    --shadowMGPandEuro: 1px 2px 4px var(--colorDarkLight);
+    --bgDark: linear-gradient(to right, var(--colorDark) 0%, var(--colorDarkLight) 20%, var(--colorDark) 100%);
+    --borderDark: 2px solid, var(--colorDarkLight);
+    --shadowDark: 1px 2px 4px var(--colorDarkLight);        
 }
 
 body {
-    font-family: 'Call of Ops Duty II', sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
-    margin: 0;
-    padding: 20px;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Call of Ops Duty II', sans-serif;
+  font-size: 28px;      
+  background: transparent; /* Important for OBS overlay */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  color: var(--fogroundColor);
 }
 
+/* Logo at top */
 .logo img {
-    max-width: 250px;
-    height: auto;
-  }
-
-.template {
-  display: none;
+  max-width: 250px;
+  height: auto;
 }
 
-.IsInRace {
-    color: rgb(64, 64, 184);
+/* Bottom scoreboard container */
+.container {
+  text-align: center;
+  padding: 15px;
+  width: 600px;      
 }
 
-.ValueChangePositive {
-    color: var(--color-positive);
+.title {
+  padding: 8px;
+  margin-bottom: 10px;
+  
+  border-radius: 12px;
+  box-shadow: var(--shadowEuroBlue);
+  border: var(--borderEuroBlue);
+  background: var(--bgEuroBlue);
 }
 
-.ValueChangeNegative {
-    color: var(--color-negative);
+.subtitle {
+  background: var(--bgMGPandEuro);
+  border: var(--borderMGPandEuro);
+  box-shadow: var(--shadowMGPandEuro);
+  border-radius: 12px;
+
+  padding: 8px;      
+  margin-bottom: 10px;
+  border-radius: 12px;
+
+  position: relative; 
+  height: 60px;
 }
 
-.headerPill {
-    padding: 5px 10px 5px 10px;
-    margin: 5px 0px 5px 0px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    display: flex;
-    align-items: center;
+.subtitle img {
+    position: absolute; /* Position images explicitly */
+    top: 50%; /* Vertically center the images */
+    transform: translateY(-50%); /* Adjust for image height */    
 }
 
-.headerPill h2 {
-    flex: 1;               /* take full width */
-    text-align: center;    /* center the text inside */
-    margin: 0;             /* remove default h2 margin */
-  }
-
-.contentPill {
-    padding: 5px 10px 5px 10px;
-    margin: 5px 0px 5px 0px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    display: flex;
-    align-items: center;
+.subtitle .left {
+    left: 15px; 
 }
 
-#upNextContainer {
-    position: fixed;
-    bottom: 100px;       /* distance from bottom */
-    left: 50%;           /* center horizontally */
-    transform: translateX(-50%); /* adjust to true center */
-    width: 1000px;
-    height: 400px;
+.subtitle .center {
+    left: 50%; /* Align to the center */
+    transform: translate(-50%, -50%); /* Center horizontally and vertically */    
 }
 
-#upClassContainer {
-    background: linear-gradient(
-        to right,
-        var(--mgp-red) 30%,   /* start red after 10% */
-        var(--euchamps-blue) 70%   /* end blue before 90% */
-    );
-    color: var(--text-bright);
-    justify-content: space-between;
+.subtitle .right {
+    right: 15px;
 }
 
-.imgleft {
-    float: left;
-    margin-right: 25px;
+.tabletop {
+  padding: 8px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadowDark);
+  border: var(--borderDark);
+  border-radius: 12px;
+  background: var(--bgDark);
 }
 
-.imgright {    
-    float: right;
-    margin-left: 25px;
+.tabletop div{
+  background: var(--bgDark);
 }
 
-.LiveRaceEntry {
-    display: flex;
-    justify-content: space-between; /* distribute items horizontally */
-    align-items: center;
-    padding: 5px 10px;
-    border-bottom: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 4px;
-    background: #f8f8f8;
-  }
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 4px;
+}
 
-  .LiveRaceEntry span {
-    flex: 1;             /* optional: make all spans take equal width */
-    text-align: center;  /* center text in each span */
-  }
+td {
+  background: var(--bgEuroBlue);
+  border: var(--borderEuroBlue);
+  box-shadow: var(--shadowEuroBlue);
+  border-radius: 8px;
+
+  padding: 8px;
+  text-align: center;
+}
+
+#Nation {
+    width: 60px;               
+    /*height: 30px;*/              
+
+    text-align: right;
+
+    background-size: cover;       /* flag stretches */
+    background-position: center;
+    background-repeat: no-repeat;
+    /*background-blend-mode: destination-over;*/
+}

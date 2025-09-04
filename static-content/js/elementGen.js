@@ -37,12 +37,18 @@ function getPilotByLooseName(name) {
         return undefined;
 
     for(const key of pilotByCallsign.keys()){
-        if(key.toLowerCase().startsWith(name.toLowerCase()))
+        var keyLower = key.toLowerCase();
+        var nameLower = name.toLowerCase();
+        if(keyLower.startsWith(nameLower) ||
+            nameLower.startsWith(keyLower))
             return pilotByCallsign.get(key);
     }
 
     for(const key of pilotByName.keys()){
-        if(key.toLowerCase().startsWith(name.toLowerCase()))
+        var keyLower = key.toLowerCase();
+        var nameLower = name.toLowerCase();
+        if(keyLower.startsWith(nameLower) ||
+            nameLower.startsWith(keyLower))
             return pilotByName.get(key);
     }
 }
@@ -81,8 +87,11 @@ function updateDataByType(dataType) {
     }
 }
 
-function updateDataLiveEstimatedPositionResponse() {
-    updateData('LiveEstimatedPositionResponse', document.getElementById("LiveEstimatedPositionResponseList"));
+async function updateDataLiveEstimatedPositionResponse() {
+    //updateData('LiveEstimatedPositionResponse', document.getElementById("LiveEstimatedPositionResponseList"));
+    const data = await getData('LiveEstimatedPositionResponse');
+    await updatePilotDB();
+    updateLiveEstimatedPositionResponse(data);
 }
 
 async function updateDataLiveRaceEntryResponse() {
@@ -259,4 +268,81 @@ function updateLiveRaceEntryResponse(data) {
         
         root.appendChild(element);
     }
+}
+
+function updateLiveEstimatedPositionResponse(data) {   
+    const root = document.getElementById("LiveEstimatedPositionResponseList");
+    if(root === null || root === undefined)
+        return;
+
+    const template = document.getElementById(`LiveEstimatedPositionResponse`);
+
+    if(template === null | template === undefined)         
+        return;
+
+    root.replaceChildren();
+
+    if(data === undefined || data.LiveEstimatedPositions === undefined)
+        return;
+
+    var position = 0;
+    const entriesPerPage = 12;
+    const pageCount = Math.ceil(data.LiveEstimatedPositions.length / entriesPerPage);
+    const startPosition = entriesPerPage * (page % pageCount);
+    const endPosition = startPosition + entriesPerPage;
+    for(const entrie of data.LiveEstimatedPositions) {                
+        if(position >= endPosition)
+            break;
+
+        if(position < startPosition) {
+            position++;
+            continue;
+        }
+
+        position++;
+
+        const clones = template.content.cloneNode(true);
+        if(clones.children.length === 0)
+            continue;
+        const element = clones.children[0];
+
+        applyData(entrie.DriverName, "DriverName", element);
+        applyData(entrie.Position, "Position", element);
+        applyData(entrie.BestSeedingResult, "BestSeedingResult", element);
+
+        var pilot = getPilot(entrie.DriverLID, entrie.DriverName, entrie.DriverName);
+        applyData(pilot?.nationality, "Nationality", element, "---");
+        applyData(pilot?.callsign, "CallSign", element);
+
+        var nationalityElement = element.querySelector("#Nationality");
+        var hasValidFlag = false;
+
+        if(pilot !== undefined ) {
+            applyData(pilot?.name, "DriverName", element);
+            if(pilot.flag !== undefined) {
+                const style = `background-image: linear-gradient(to right, rgba(255,255,255,0) 5%, var(--backgroundColor) 100%), url('img/flags/${pilot.flag}.svg');`;
+                nationalityElement.style.cssText  = "";
+                nationalityElement.style.cssText = style;
+                hasValidFlag = true;
+            }
+        }
+        if (!hasValidFlag) {
+            nationalityElement.style.cssText = "";
+        }
+        
+        root.appendChild(element);
+    }
+}
+
+var page = 0;
+const pageInterval = 7000; // 15 seconds
+function startPageTimer() {
+    setInterval(() => {
+        nextPage();
+    }, pageInterval);
+}
+
+function nextPage() {
+    page++;
+    updateAllData();
 }

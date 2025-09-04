@@ -364,6 +364,7 @@ function updateLiveRaceEntryResponse(data) {
         applyVisible(isQualifying, "Top3Consecutive", element);
         applyVisible(isRace, "Position", element);
         applyVisible(isRace, "Number", element);
+        applyVisible(isRace, "SortTimeBehindPositionAbove", element);
 
         applyData(entrie.DriverName, "DriverName", element);
         applyData(entrie.Position, "Position", element);

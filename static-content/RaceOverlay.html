@@ -1,0 +1,152 @@
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="css/styles.css">
+        <script src="js/elementGen.js"></script>
+        <script>
+            window.onload = function() {                
+                updateAllData();
+                connectWebSocket();
+            };
+        </script>
+        <style>
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 33.33%);
+    grid-template-rows: repeat(3, 33.33%); 
+    gap: 0px;
+    padding: 0px;
+    width: 100vw;
+    height: 100vh;
+}
+
+.grid-item {
+    /*border:1px solid red;/**/
+    position: relative;
+    overflow: hidden;
+
+    font-size: 14px;
+}
+
+.bottom-line {
+    position: absolute;
+    bottom: 0; 
+    left: 0;     
+    width: calc(100% - 10px); /**/
+    /*width: 50%;/**/
+    height: 30px;
+    padding: 5px;
+    margin: 5px;
+    box-sizing: border-box; 
+
+    display: flex;
+    justify-content: space-between;
+    align-items: bottom;
+    
+  border-radius: 8px;
+  box-shadow: var(--shadowEuroBlue);
+  border: var(--borderEuroBlue);
+  background: var(--bgEuroBlue);
+}
+
+#FullName {
+    white-space: nowrap; /* Prevent line breaks */
+    text-overflow: ellipsis; /* Add "..." if the text overflows */
+    display: inline-block; /* Ensure it behaves like an inline block */
+    max-width: 100%;
+}
+
+#LiveRaceEntryLapsList {
+    display: flex; /* Use flexbox for horizontal alignment */
+    flex-direction: row-reverse; /* Start with the rightmost element visible */
+    max-width: 100%; /* Ensure it doesn't exceed the parent width */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    overflow-y: hidden; /* Prevent vertical scrolling */
+    box-sizing: border-box; /* Include padding in the width/height calculation */
+    position: relative; /* Required for the fade effect */
+    scroll-behavior: smooth; /* Smooth scrolling */
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 20px, black 100%);
+    mask-image: linear-gradient(to right, transparent, black 20px, black 100%);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+}
+
+#LiveRaceEntryLapsList::-webkit-scrollbar {
+    display: none; /* Hide scrollbar in WebKit browsers (Chrome, Safari) */
+}
+
+.top-right {   
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    margin: 5px;
+    width: 75px;;
+
+    display: flex;
+    justify-content: space-between;
+
+    border-radius: 8px;
+  box-shadow: var(--shadowEuroBlue);
+  border: var(--borderEuroBlue);
+  background: var(--bgEuroBlue);
+}
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
+.position {
+    font-size: 24px;
+}
+
+.time {
+    padding: 5px;
+}
+
+.lap {
+    padding: 0px;
+    padding-left: 5px;
+}
+        </style>
+    </head>
+    <body>        
+        <template id="LiveRaceEntries">
+            <div class="grid-item">
+                <div class="bottom-line">
+                    <spaw id="FullName">FullName</spaw>
+                    <!--<div id="FrequencyName">FrequencyName</div>-->
+                    <spaw id="LiveRaceEntryLapsList"></spaw>
+                </div>
+                <div id="IsRace" class="top-right">                    
+                    <spaw class="left position" id="Position">Position</spaw>
+                    <spaw class="right time" id="SortTimeBehindPositionAbove">SortTimeBehindPositionAbove</spaw>
+                </div>
+                <div id="IsQualifying" class="top-right">
+                    <spaw class="left position" id="LiveEstimatedQualifyingPosition">LiveEstimatedQualifyingPosition</spaw>
+                    <spaw class="right time" id="Top3Consecutive">Top3Consecutive</spaw>
+                </div>
+            </div>
+        </template>
+        <template id="LiveRaceEntryLaps">
+            <spaw class="right lap" id="LapTimeSeconds">LapTimeSeconds</spaw>
+        </template>
+        <div id="LiveRaceEntryResponseList" class="grid-container"></div>
+    </body>
+</html>

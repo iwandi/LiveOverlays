@@ -68,14 +68,48 @@ function getPilot(id, name, looseName){
     return undefined;
 }
 
+var eventData = null;
+
+async function updateEventData() {
+    const dataFetch = await fetch('/data/manual/event.json');
+    const data = await dataFetch.json();
+
+    eventData = data;
+}
+
+function getGridPosition(entrie) {
+    if(entrie === null || entrie === undefined ||
+        entrie.FrequencyName === null || entrie.FrequencyName === undefined)
+        return -1;
+
+    const frequencyName = entrie.FrequencyName;
+    for(const pos of eventData.grid)
+    {
+        if(frequencyName.startsWith(pos.FrequencyName))
+            return pos.gridPosition;
+    }
+
+    return -1;
+}
+
+function sortByGrid(lhs, rhs) {
+    const lhsGrid = getGridPosition(lhs);
+    const rhsGrid = getGridPosition(rhs);
+    return lhsGrid - rhsGrid;
+}
 
 function updateAllData() {
+    updateEventData();
+    updateDataLiveRaceStateResponse();
     updateDataLiveEstimatedPositionResponse();
     updateDataLiveRaceEntryResponse();
 }
 
 function updateDataByType(dataType) {
     switch(dataType) {
+        case 'LiveRaceStateResponse':
+            updateDataLiveRaceStateResponse();
+            break;
         case 'LiveEstimatedPositionResponse':
             updateDataLiveEstimatedPositionResponse();
             break;
@@ -87,18 +121,20 @@ function updateDataByType(dataType) {
     }
 }
 
+async function updateDataLiveRaceStateResponse() {
+    const data = await getData('LiveRaceStateResponse');
+    updateLiveRaceStateResponse(data);
+}
+
 async function updateDataLiveEstimatedPositionResponse() {
-    //updateData('LiveEstimatedPositionResponse', document.getElementById("LiveEstimatedPositionResponseList"));
     const data = await getData('LiveEstimatedPositionResponse');
     await updatePilotDB();
     updateLiveEstimatedPositionResponse(data);
 }
 
 async function updateDataLiveRaceEntryResponse() {
-    //updateData('LiveRaceEntryResponse', document.getElementById("LiveRaceEntryResponseList"));
     const data = await getData('LiveRaceEntryResponse');
     await updatePilotDB();
-
     updateLiveRaceEntryResponse(data);
 }
 
@@ -216,9 +252,40 @@ function applyData(elementData, elementId, element, nullValue = "") {
     
     var dataElement = element.querySelector("#" + elementId);
     if(dataElement === null || dataElement === undefined)
+    {
+        if(element.id === elementId)
+            dataElement = element;
+        else
+            return;
+    }
+    dataElement.textContent = elementData;
+}
+
+function applyVisible(visible, elementId, element) {
+    if(visible === undefined)
+        visible = false;
+
+    var dataElement = element.querySelector("#" + elementId);
+    if(dataElement === null || dataElement === undefined)
         return;
 
-    dataElement.textContent = elementData;
+    dataElement.style.display = visible ? "" : "none";
+}
+
+var isRace = false;
+var isQualifying = false;
+
+function updateLiveRaceStateResponse(data) {    
+    isRace = data.RoundType == 3;
+    isQualifying = data.RoundType == 2;
+
+    const root = document.getElementById("LiveRaceStateResponse");
+    if(root === null || root === undefined)
+        return;
+
+    applyData(data.RaceName, "RaceName", root);
+    applyData(data.RaceClassInformation, "RaceClassInformation", root);
+    applyData(data.RoundLetterTypeOrderNumberDisplay, "RoundLetterTypeOrderNumberDisplay", root);
 }
 
 function updateLiveRaceEntryResponse(data) {   
@@ -227,6 +294,8 @@ function updateLiveRaceEntryResponse(data) {
         return;
 
     const template = document.getElementById(`LiveRaceEntries`);
+    const templateLaps = document.getElementById(`LiveRaceEntryLaps`);
+    const tampleteLapsIsValid = templateLaps !== null && templateLaps !== undefined;
 
     if(template === null | template === undefined)         
         return;
@@ -236,24 +305,56 @@ function updateLiveRaceEntryResponse(data) {
     if(data === undefined || data.LiveRaceEntries === undefined)
         return;
 
-    for(const entrie of data.LiveRaceEntries) {                   
+    var entires = data.LiveRaceEntries;
+    entires = entires.sort(sortByGrid);
+
+    for(const entrie of entires) {                   
         const clones = template.content.cloneNode(true);
         if(clones.children.length === 0)
             continue;
         const element = clones.children[0];
 
+        applyVisible(isRace, "IsRace", element);
+        applyVisible(isQualifying, "IsQualifying", element);
+
         applyData(entrie.DriverName, "DriverName", element);
+        applyData(entrie.Position, "Position", element);
+        applyData(entrie.FrequencyName, "FrequencyName", element);
+        applyData(entrie.SortTimeBehindPositionAbove, "SortTimeBehindPositionAbove", element);
         applyData(entrie.LiveEstimatedQualifyingPosition, "LiveEstimatedQualifyingPosition", element);
         applyData(entrie.Top3Consecutive, "Top3Consecutive", element);
 
         var pilot = getPilot(entrie.DriverLID, entrie.DriverName, entrie.DriverName);
         applyData(pilot?.nationality, "Nationality", element, "---");
         applyData(pilot?.callsign, "CallSign", element);
+        
+        var fullName = entrie.DriverName;
+        if(pilot !== undefined)
+        {
+            fullName = pilot.name + " | " + pilot.callsign;
+        }
+        applyData(fullName, "FullName", element);
+
+        const lapsRoot = element.querySelector("#LiveRaceEntryLapsList");
+        const lapsRootIsValid = lapsRoot !== null && lapsRoot !== undefined;
+
+        if(tampleteLapsIsValid && lapsRootIsValid) {
+            for(const lap of entrie.LiveRaceEntryLaps) {
+                const clones = templateLaps.content.cloneNode(true);
+                if(clones.children.length === 0)
+                    continue;
+                const elementLap = clones.children[0];
+
+                applyData(lap.LapTimeSeconds, "LapTimeSeconds", elementLap);
+                lapsRoot.appendChild(elementLap);
+            }
+        }
 
         var nationalityElement = element.querySelector("#Nationality");
+        var nationalityElementIsValid = nationalityElement !== null && nationalityElement !== undefined;
         var hasValidFlag = false;
 
-        if(pilot !== undefined ) {
+        if(pilot !== undefined && nationalityElementIsValid) {
             applyData(pilot?.name, "DriverName", element);
             if(pilot.flag !== undefined) {
                 const style = `background-image: linear-gradient(to right, rgba(255,255,255,0) 5%, var(--backgroundColor) 100%), url('img/flags/${pilot.flag}.svg');`;
@@ -262,7 +363,7 @@ function updateLiveRaceEntryResponse(data) {
                 hasValidFlag = true;
             }
         }
-        if (!hasValidFlag) {
+        if (!hasValidFlag && nationalityElementIsValid) {
             nationalityElement.style.cssText = "";
         }
         
@@ -314,19 +415,27 @@ function updateLiveEstimatedPositionResponse(data) {
         applyData(pilot?.nationality, "Nationality", element, "---");
         applyData(pilot?.callsign, "CallSign", element);
 
+        var fullName = entrie.DriverName;
+        if(pilot !== undefined)
+        {
+            fullName = pilot.name + " | " + pilot.callsign;
+        }
+        applyData(fullName, "FullName", element);
+
         var nationalityElement = element.querySelector("#Nationality");
+        var nationalityElementIsValid = nationalityElement !== null && nationalityElement !== undefined;
         var hasValidFlag = false;
 
         if(pilot !== undefined ) {
             applyData(pilot?.name, "DriverName", element);
-            if(pilot.flag !== undefined) {
+            if(pilot.flag !== undefined && nationalityElementIsValid) {
                 const style = `background-image: linear-gradient(to right, rgba(255,255,255,0) 5%, var(--backgroundColor) 100%), url('img/flags/${pilot.flag}.svg');`;
                 nationalityElement.style.cssText  = "";
                 nationalityElement.style.cssText = style;
                 hasValidFlag = true;
             }
         }
-        if (!hasValidFlag) {
+        if (!hasValidFlag & nationalityElementIsValid) {
             nationalityElement.style.cssText = "";
         }
         

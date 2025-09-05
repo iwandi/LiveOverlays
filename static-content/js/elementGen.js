@@ -100,6 +100,7 @@ function sortByGrid(lhs, rhs) {
 
 function updateAllData() {
     updateEventData();
+    updateDataLiveStateResponse();
     updateDataLiveRaceStateResponse();
     updateDataLiveEstimatedPositionResponse();
     updateDataLiveRaceEntryResponse();
@@ -107,6 +108,9 @@ function updateAllData() {
 
 function updateDataByType(dataType) {
     switch(dataType) {
+        case 'LiveStateResponse':
+            updateDataLiveStateResponse();
+            break;
         case 'LiveRaceStateResponse':
             updateDataLiveRaceStateResponse();
             break;
@@ -119,6 +123,11 @@ function updateDataByType(dataType) {
         default:
             console.warn(`Unknown data type: ${dataType}`);
     }
+}
+
+async function updateDataLiveStateResponse() {
+    const data = await getData('LiveStateResponse');
+    updateLiveStateResponse(data);
 }
 
 async function updateDataLiveRaceStateResponse() {
@@ -301,6 +310,20 @@ function applyVisibleClass(visible, className) {
 
 var isRace = false;
 var isQualifying = false;
+
+function updateLiveStateResponse(data) {
+    const root = document.getElementById("LiveStateResponse");
+    if(root === null || root === undefined)
+        return;
+    
+    if(eventData !== null && eventData !== undefined &&
+        eventData.overrideEventname !== undefined && eventData.overrideEventname !== "" ) {
+        applyData(eventData.overrideEventname, "EventName", root);
+    }
+    else {
+        applyData(data.EventName, "EventName", root);
+    }
+}
 
 function updateLiveRaceStateResponse(data) {    
     isRace = data.RoundType == 3;

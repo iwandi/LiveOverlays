@@ -54,6 +54,9 @@ function getPilotByLooseName(name) {
 }
 
 function getPilot(id, name, looseName){
+    if(id === undefined)
+        return undefined;
+
     var pilot = getElementByLID(id);
     if(pilot != undefined)
         return pilot;
@@ -348,6 +351,7 @@ function sortByPos(lhs, rhs) {
 }
 
 var alwaysSortByGrid = false;
+var fillInMissingChannels = false;
 function updateLiveRaceEntryResponse(data) {   
     const root = document.getElementById("LiveRaceEntryResponseList");
     if(root === null || root === undefined)
@@ -366,6 +370,31 @@ function updateLiveRaceEntryResponse(data) {
         return;
 
     var entires = data.LiveRaceEntries;
+    if(fillInMissingChannels) {
+        var pressent = new Set();
+        for(const entry of entires) {
+            pressent.add(entry.FrequencyName);
+        }
+
+        for(const gridPosition of eventData.grid) {
+            var isPressent = false;
+            for(const frequencyName of pressent) {
+                if(frequencyName.startsWith(gridPosition.FrequencyName)) {
+                    isPressent = true;
+                    break;
+                }
+            }
+            if(!isPressent) {
+                var newEntry = {
+                    DriverName: "",
+                    Position: "",
+                    FrequencyName: gridPosition.FrequencyName
+                };
+                entires.push(newEntry);
+            }
+        }
+    }
+
     var applySortByGrid = !isRace;
     if(alwaysSortByGrid)
         applySortByGrid = true;
@@ -411,7 +440,7 @@ function updateLiveRaceEntryResponse(data) {
         const lapsRoot = element.querySelector("#LiveRaceEntryLapsList");
         const lapsRootIsValid = lapsRoot !== null && lapsRoot !== undefined;
 
-        if(tampleteLapsIsValid && lapsRootIsValid) {
+        if(tampleteLapsIsValid && lapsRootIsValid && entrie.LiveRaceEntryLaps !== undefined) {
             for(const lap of entrie.LiveRaceEntryLaps) {
                 const clones = templateLaps.content.cloneNode(true);
                 if(clones.children.length === 0)

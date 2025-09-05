@@ -328,6 +328,9 @@ function updateLiveStateResponse(data) {
 function updateLiveRaceStateResponse(data) {    
     isRace = data.RoundType == 3;
     isQualifying = data.RoundType == 2;
+    
+    applyVisibleClass(isRace, "enableInRace");
+    applyVisibleClass(isQualifying, "enableInQualifying");
 
     const root = document.getElementById("LiveRaceStateResponse");
     if(root === null || root === undefined)
@@ -336,9 +339,6 @@ function updateLiveRaceStateResponse(data) {
     applyData(data.RaceName, "RaceName", root);
     applyData(data.RaceClassInformation, "RaceClassInformation", root);
     applyData(data.RoundLetterTypeOrderNumberDisplay, "RoundLetterTypeOrderNumberDisplay", root);
-
-    applyVisibleClass(isRace, "IsRenableInRaceace");
-    applyVisibleClass(isQualifying, "enableInQualifying");
 }
 
 function sortByPos(lhs, rhs) {

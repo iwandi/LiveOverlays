@@ -9,6 +9,7 @@
 }
         </style>
         <script>
+            entriesPerPage = 12;
             window.onload = function() {                
                 updateAllData();
                 connectWebSocket();
@@ -31,7 +32,7 @@
             <div id="RaceClassInformation" class="tabletop">RaceClassInformation</div>
         
             <template id="LiveEstimatedPositionResponse">
-                <tr id="LiveEstimatedPositions">
+                <tr id="LiveEstimatedPositions" class="animate-fade-in">
                     <td id="Nationality" style="background-image: linear-gradient(to right, rgba(255,255,255,0) 5%, var(--backgroundColor) 100%), url('img/flags/us.svg');">USA</td>
                     <td style="text-align: left;">
                         <span id="FullName">FullName</span>
@@ -44,7 +45,7 @@
             </table>
 
             <template id="LiveRaceEntries">
-                <tr id="LiveRaceEntries">
+                <tr id="LiveRaceEntries" class="animate-fade-in">
                     <td id="Nationality" style="background-image: linear-gradient(to right, rgba(255,255,255,0) 5%, var(--backgroundColor) 100%), url('img/flags/us.svg');">USA</td>
                     <td style="text-align: left;">
                         <span id="FullName">FullName</span>

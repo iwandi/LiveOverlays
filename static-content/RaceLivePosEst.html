@@ -10,6 +10,16 @@
             #Position {
                 width: 20px;
             }
+
+            body {
+                display:flex;
+                align-items: end;
+                padding: 0;
+            }
+
+            .container-mini {
+                padding-right: 1px;
+            }
         </style>
         <script src="js/elementGen.js"></script>
         <script>
@@ -25,7 +35,7 @@
     <body>
         <div id="LiveRaceStateResponse" class="container-mini">
             <template id="LiveEstimatedPositionResponse">
-                <tr id="LiveEstimatedPositions">
+                <tr id="LiveEstimatedPositions" class="animate-fade-in">
                     <td id="Nationality" style="background-image: linear-gradient(to right, rgba(255,255,255,0) 5%, var(--backgroundColor) 100%), url('img/flags/us.svg');">USA</td>
                     <td style="text-align: left;">
                         <span id="CallSign">CallSign</span>

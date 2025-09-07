@@ -227,7 +227,7 @@ td {
 }
 
 .animate-fade-in:nth-child(14) {
-  animation-delay: 0.65;
+  animation-delay: 0.65s;
 }
 
 .animate-fade-in:nth-child(15) {

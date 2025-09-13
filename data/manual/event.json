@@ -1,0 +1,52 @@
+{
+    "overrideEventname" : "MultiGP European Championship 2025",
+    "mains" : 
+    {        
+        "type" : "ladder-ab",
+        "finalsLID" : 351,
+        "bumpUpCount" : 2
+    },
+    "grid" :
+    [
+        {
+            "gridPosition" : 1,
+            "FrequencyName" : "R7",
+            "OBSScene" : "VG_Capture FPV Feed 1-1"
+        },
+        {
+            "gridPosition" : 2,
+            "FrequencyName" : "R8",
+            "OBSScene" : "VG_Capture FPV Feed 1-2"
+        },
+        {
+            "gridPosition" : 3,
+            "FrequencyName" : "L6",
+            "OBSScene" : "VG_Capture FPV Feed 1-3"
+        },
+        {
+            "gridPosition" : 4,
+            "FrequencyName" : "L7",
+            "OBSScene" : "VG_Capture FPV Feed 1-4"
+        },
+        {
+            "gridPosition" : 5,
+            "FrequencyName" : "R1",
+            "OBSScene" : "VG_Capture FPV Feed 2-1"
+        },
+        {
+            "gridPosition" : 6,
+            "FrequencyName" : "R2",
+            "OBSScene" : "VG_Capture FPV Feed 2-2"
+        },
+        {
+            "gridPosition" : 7,
+            "FrequencyName" : "F2",
+            "OBSScene" : "VG_Capture FPV Feed 2-3"
+        },
+        {
+            "gridPosition" : 8,
+            "FrequencyName" : "F4",
+            "OBSScene" : "VG_Capture FPV Feed 2-4"
+        }
+    ]
+}

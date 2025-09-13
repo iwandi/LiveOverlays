@@ -15,6 +15,9 @@ async function updatePilotDB(){
         if(pilot.name != undefined)
             pilotByName.set(pilot.name, pilot);
 
+        if(pilot.altname != undefined)
+            pilotByName.set(pilot.altname, pilot);
+
         if(pilot.callsign != undefined)
             pilotByCallsign.set(pilot.callsign, pilot);
     }
@@ -36,6 +39,9 @@ function getPilotByLooseName(name) {
     if(name === undefined)
         return undefined;
 
+    if(name == "")
+        return undefined;
+
     for(const key of pilotByCallsign.keys()){
         var keyLower = key.toLowerCase();
         var nameLower = name.toLowerCase();
@@ -54,12 +60,11 @@ function getPilotByLooseName(name) {
 }
 
 function getPilot(id, name, looseName){
-    if(id === undefined)
-        return undefined;
-
-    var pilot = getElementByLID(id);
-    if(pilot != undefined)
-        return pilot;
+    if(id !== undefined) {
+        var pilot = getElementByLID(id);
+        if(pilot != undefined)
+            return pilot;
+    }
 
     pilot = getPilorByName(name);
     if(pilot != undefined)
@@ -424,7 +429,8 @@ function updateLiveRaceEntryResponse(data) {
         applyData(entrie.FrequencyName, "FrequencyName", element);
         applyData(formatTime(entrie.SortTimeBehindPositionAbove), "SortTimeBehindPositionAbove", element);
         applyData(entrie.LiveEstimatedQualifyingPosition, "LiveEstimatedQualifyingPosition", element);
-        applyData(formatTime(entrie.Top3Consecutive), "Top3Consecutive", element);
+        applyData(entrie.StartEstimatedQualifyingPosition, "StartEstimatedQualifyingPosition", element);
+        applyData(entrie.Top3Consecutive, "Top3Consecutive", element);
 
         var pilot = getPilot(entrie.DriverLID, entrie.DriverName, entrie.DriverName);
         applyData(pilot?.nationality, "Nationality", element, "---");
@@ -510,7 +516,7 @@ function updateLiveEstimatedPositionResponse(data) {
 
         applyData(entrie.DriverName, "DriverName", element);
         applyData(entrie.Position, "Position", element);
-        applyData(formatTime(entrie.BestSeedingResult), "BestSeedingResult", element);    
+        applyData(entrie.BestSeedingResult, "BestSeedingResult", element);    
 
         var pilot = getPilot(entrie.DriverLID, entrie.DriverName, entrie.DriverName);
         applyData(pilot?.nationality, "Nationality", element, "---");

@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="css/styles.css">
+        <script src="js/elementGen.js"></script>
+        <style>
+.container {
+    height: 300px;
+}
+
+.logo img {
+  max-height: 500px;
+}
+        </style>
+        <script>
+            window.onload = function() {                
+                updateAllData();
+                connectWebSocket();
+            };
+        </script>
+    </head>
+    <body>        
+        <div class="logo">
+            <img src="img/eurochamps-on-white-500px.png" alt="Championship Logo">
+        </div>
+
+        <div id="LiveRaceStateResponse" class="container">
+            <div id="LiveStateResponse" class="title"><span id="EventName">EventName</span></div>
+            <div class="subtitle">
+                <img src="img/multigp-on-dark-150px.png" alt="MultiGP Logo" class="left">
+                <img src="img/multgp-open.png" alt="Openclass Logo" class="center">
+                <img src="img/eurochamps-on-white-150px.png" alt="European Champs" class="right">
+            </div>
+            <div class="tabletop">We will be back soon</div>
+        </div>
+    </body>
+</html>

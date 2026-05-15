@@ -53,7 +53,7 @@ const COUNTRY_NAME_TO_IOC = {
     england: 'GBR',
     poland: 'POL',
     japan: 'JPN',
-    south korea: 'KOR',
+    'south korea': 'KOR',
     israel: 'ISR',
     greece: 'GRE',
     latvia: 'LAT',
@@ -312,6 +312,15 @@ function parseRegistrationUrlArg(argv) {
 }
 
 async function main() {
+    const args = process.argv.slice(2);
+    if (args.includes('--help') || args.includes('-h')) {
+        console.log('Usage: npm run update-pilotdb -- [--registration-url=<url>]');
+        console.log('Merges optional data/manual/merge_pilotdb.sjon or .json,');
+        console.log('adds missing pilots from data/LiveEstimatedPositionResponse.json,');
+        console.log('and enriches pilots from MultiGP and optional registration page.');
+        return;
+    }
+
     const rootDir = path.resolve(__dirname, '..');
     const dataDir = path.join(rootDir, 'data');
     const manualDir = path.join(dataDir, 'manual');
@@ -319,7 +328,7 @@ async function main() {
     const mergeSjonPath = path.join(manualDir, 'merge_pilotdb.sjon');
     const mergeJsonPath = path.join(manualDir, 'merge_pilotdb.json');
     const liveEstimatedPath = path.join(dataDir, 'LiveEstimatedPositionResponse.json');
-    const registrationUrl = parseRegistrationUrlArg(process.argv.slice(2));
+    const registrationUrl = parseRegistrationUrlArg(args);
     const lookupUrls = [
         'https://www.multigp.com/pilots/all-pilots/',
         registrationUrl

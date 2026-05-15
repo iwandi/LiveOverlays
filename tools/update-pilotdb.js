@@ -169,11 +169,11 @@ function pilotsFromLiveEstimatedPosition(response) {
 function decodeHtmlEntities(text) {
     return text
         .replace(/&nbsp;/g, ' ')
-        .replace(/&amp;/g, '&')
         .replace(/&quot;/g, '"')
         .replace(/&#39;/g, '\'')
         .replace(/&lt;/g, '<')
-        .replace(/&gt;/g, '>');
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&');
 }
 
 function stripTags(html) {
@@ -235,9 +235,10 @@ function extractCandidatesFromRegistrationTable(html) {
 function extractCandidatesFromHtml(html) {
     const candidates = [];
 
-    const scripts = html.match(/<script[^>]*>([\s\S]*?)<\/script>/gi) || [];
-    for (const scriptTag of scripts) {
-        const content = scriptTag.replace(/<script[^>]*>/i, '').replace(/<\/script>/i, '').trim();
+    const scriptRegex = /<script\b[^>]*>([\s\S]*?)<\/script[^>]*>/gi;
+    let scriptMatch = null;
+    while ((scriptMatch = scriptRegex.exec(html)) !== null) {
+        const content = (scriptMatch[1] || '').trim();
         if (!content) continue;
         const jsonCandidates = [];
 

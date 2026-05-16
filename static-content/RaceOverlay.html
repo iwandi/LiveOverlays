@@ -37,7 +37,7 @@ body {
     position: relative;
     overflow: hidden;
 
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .bottom-line {
@@ -70,7 +70,7 @@ body {
 
 #LiveRaceEntryLapsList {
     display: flex; /* Use flexbox for horizontal alignment */
-    flex-direction: row-reverse; /* Start with the rightmost element visible */
+    flex-direction: row; /* Start with the rightmost element visible */
     max-width: 100%; /* Ensure it doesn't exceed the parent width */
     overflow-x: auto; /* Enable horizontal scrolling */
     overflow-y: hidden; /* Prevent vertical scrolling */
@@ -78,8 +78,8 @@ body {
     position: relative; /* Required for the fade effect */
     scroll-behavior: smooth; /* Smooth scrolling */
     scrollbar-width: none; /* Hide scrollbar in Firefox */
-    -webkit-mask-image: linear-gradient(to right, transparent, black 20px, black 100%);
-    mask-image: linear-gradient(to right, transparent, black 20px, black 100%);
+    /*-webkit-mask-image: linear-gradient(to right, transparent, black 20px, black 100%);
+    mask-image: linear-gradient(to right, transparent, black 20px, black 100%);*/
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-size: 100% 100%;
@@ -148,7 +148,7 @@ body {
             </div>
         </template>
         <template id="LiveRaceEntryLaps">
-            <spaw class="right lap" id="LapTimeSeconds">LapTimeSeconds</spaw>
+            <spaw class="right lap"><spaw id="LapTimeSeconds">LapTimeSeconds</spaw> | </spaw>
         </template>
         <div id="LiveRaceEntryResponseList" class="grid-container"></div>
     </body>

@@ -1,88 +1,88 @@
 @font-face {
-    font-family: 'Saira Condensed'; /* Name of the font */
-    src: url('../fonts/SairaCondensed-Regular.ttf') format('truetype'); /* Path to the font file */
-    font-weight: normal; /* Specify the font weight */
-    font-style: normal; /* Specify the font style */
+    font-family: 'Saira Condensed';
+    src: url('../fonts/SairaCondensed-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 :root {
-    --colorMGPRed: #8d181bff;
-    --colorEuroBlue :#004494ff;
-    --colorEuroBlueLight: #005ac2ff;
-    --colorEuroYelow: #ffd617ff;
-    --colorDark: black;
-    --colorDarkLight: #222222ff;
-    
-    --fogroundColor: white;
-    --borderColor: white;
-    --backgroundColor: #004494ff;  
+    --colorMGPRed: #8d181b;
+    --colorEuroBlue: #004494;
+    --colorEuroBlueLight: #1464cb;
+    --colorEuroYellow: #ffd617;
+    --colorDark: #050505;
+    --colorDarkLight: #1f1f1f;
 
-    --bgEuroBlue: linear-gradient(to right, var(--colorEuroBlue) 0%, var(--colorEuroBlueLight) 20%, var(--colorEuroBlue) 100%);
-    --borderEuroBlue: 2px solid, var(--colorDark);
-    --shadowEuroBlue: 1px 2px 4px var(--colorDarkLight);
-    --bgMGPandEuro: linear-gradient(to right, var(--colorMGPRed) 0%, var(--colorMGPRed) 33%, var(--colorDark) 45%, var(--colorDark) 55%,var(--colorEuroBlue) 66%, var(--colorEuroBlue) 100%);
-    --borderMGPandEuro: 2px solid, var(--colorDark);
-    --shadowMGPandEuro: 1px 2px 4px var(--colorDarkLight);
-    --bgDark: linear-gradient(to right, var(--colorDark) 0%, var(--colorDarkLight) 20%, var(--colorDark) 100%);
-    --borderDark: 2px solid, var(--colorDarkLight);
-    --shadowDark: 1px 2px 4px var(--colorDarkLight);        
+    --foregroundColor: #ffffff;
+    --borderColor: #ffffff;
+    --backgroundColor: #004494;
+
+    --bgEuroBlue: linear-gradient(100deg, #003a84 0%, #0e58b7 45%, #003a84 100%);
+    --borderEuroBlue: 2px solid rgba(255, 255, 255, 0.9);
+    --shadowEuroBlue: 0 6px 18px rgba(0, 0, 0, 0.45);
+
+    --bgMGPandEuro: linear-gradient(100deg, #8d181b 0%, #8d181b 30%, #0c0c0c 48%, #004494 70%, #004494 100%);
+    --borderMGPandEuro: 2px solid rgba(255, 255, 255, 0.9);
+    --shadowMGPandEuro: 0 6px 18px rgba(0, 0, 0, 0.45);
+
+    --bgDark: linear-gradient(90deg, #050505 0%, #252525 40%, #050505 100%);
+    --borderDark: 2px solid rgba(255, 255, 255, 0.45);
+    --shadowDark: 0 6px 18px rgba(0, 0, 0, 0.5);
 }
 
 body {
   margin: 0;
   height: 100vh;
   width: 100vw;
-  /*font-family: 'Call of Ops Duty II', sans-serif;*/
-  font-family: 'Saira Condensed';
-  font-size: 28px;      
-  background: transparent; /* Important for OBS overlay */
+  font-family: 'Saira Condensed', Arial, sans-serif;
+  font-size: 28px;
+  background: transparent;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  color: var(--fogroundColor);
+  color: var(--foregroundColor);
+  letter-spacing: 0.3px;
 }
 
-/* Logo at top */
 .logo img {
-  padding-top: 150px;
-  max-height: 250px;
+  padding-top: 120px;
+  max-height: 230px;
   height: auto;
 }
 
 .subtitle img {
-    max-height: 70px;
-    max-width: 180px;
+    max-height: 66px;
+    max-width: 220px;
     height: auto;
     width: auto;
 }
 
 .subtitle .right {
-    padding-right: 0px;
+    padding-right: 2px;
 }
 
-/* Bottom scoreboard container */
 .container {
   text-align: center;
   padding: 15px;
-  width: 600px;      
+  width: 640px;
 }
 
 .container-mini {
     text-align: center;
     padding: 15px;
-    width: 250px;      
-  }
+    width: 280px;
+}
 
 .title {
-  padding: 8px;
+  padding: 8px 12px;
   margin-bottom: 10px;
-  
   border-radius: 12px;
   box-shadow: var(--shadowEuroBlue);
   border: var(--borderEuroBlue);
   background: var(--bgEuroBlue);
+  text-transform: uppercase;
 }
 
 .subtitle {
@@ -90,32 +90,29 @@ body {
   border: var(--borderMGPandEuro);
   box-shadow: var(--shadowMGPandEuro);
   border-radius: 12px;
-
-  padding: 8px;      
+  padding: 8px;
   margin-bottom: 10px;
-  border-radius: 12px;
-
-  position: relative; 
-  height: 60px;
+  position: relative;
+  height: 64px;
 }
 
 .subtitle img {
-    position: absolute; /* Position images explicitly */
-    top: 50%; /* Vertically center the images */
-    transform: translateY(-50%); /* Adjust for image height */    
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .subtitle .left {
-    left: 75px; 
+    left: 24px;
 }
 
 .subtitle .center {
-    left: 50%; /* Align to the center */
-    transform: translate(-50%, -50%); /* Center horizontally and vertically */    
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .subtitle .right {
-    right: 15px;
+    right: 14px;
 }
 
 .tabletop {
@@ -142,114 +139,50 @@ td {
   border: var(--borderEuroBlue);
   box-shadow: var(--shadowEuroBlue);
   border-radius: 8px;
-
-  padding: 4px 8px 4px 8px;
+  padding: 4px 8px;
   text-align: center;
 }
 
 #Nationality {
-    width: 40px;               
-    /*height: 30px;*/              
-
+    width: 40px;
     text-align: right;
-
-    background-size: cover;       /* flag stretches */
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    /*background-blend-mode: destination-over;*/
 }
 
 @keyframes fadeIn {
   from {
       opacity: 0;
-      transform: translate(5px, 10px); /* Slightly move the element down */
+      transform: translate(5px, 10px);
   }
   to {
       opacity: 1;
-      transform: translate(0, 0); /* Move it back to its original position */
+      transform: translate(0, 0);
   }
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.4s ease-out; /* Apply the fade-in animation */
+  animation: fadeIn 0.4s ease-out;
 }
 
-.animate-fade-in:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.animate-fade-in:nth-child(2) {
-  animation-delay: 0.05s;
-}
-
-.animate-fade-in:nth-child(3) {
-  animation-delay: 0.1s;
-}
-
-.animate-fade-in:nth-child(4) {
-  animation-delay: 0.15s;
-}
-
-.animate-fade-in:nth-child(5) {
-  animation-delay: 0.20s;
-}
-
-.animate-fade-in:nth-child(6) {
-  animation-delay: 0.25s;
-}
-
-.animate-fade-in:nth-child(7) {
-  animation-delay: 0.30s;
-}
-
-.animate-fade-in:nth-child(8) {
-  animation-delay: 0.35s;
-}
-
-.animate-fade-in:nth-child(9) {
-  animation-delay: 0.40s;
-}
-
-.animate-fade-in:nth-child(10) {
-  animation-delay: 0.45s;
-}
-
-.animate-fade-in:nth-child(11) {
-  animation-delay: 0.50s;
-}
-
-.animate-fade-in:nth-child(12) {
-  animation-delay: 0.55s;
-}
-
-.animate-fade-in:nth-child(13) {
-  animation-delay: 0.60s;
-}
-
-.animate-fade-in:nth-child(14) {
-  animation-delay: 0.65s;
-}
-
-.animate-fade-in:nth-child(15) {
-  animation-delay: 0.70s;
-}
-
-.animate-fade-in:nth-child(16) {
-  animation-delay: 0.75s;
-}
-
-.animate-fade-in:nth-child(17) {
-  animation-delay: 0.80s;
-}
-
-.animate-fade-in:nth-child(18) {
-  animation-delay: 0.85s;
-}
-
-.animate-fade-in:nth-child(19) {
-  animation-delay: 0.90s;
-}
-
-.animate-fade-in:nth-child(20) {
-  animation-delay: 0.95s;
-}
+.animate-fade-in:nth-child(1) { animation-delay: 0s; }
+.animate-fade-in:nth-child(2) { animation-delay: 0.05s; }
+.animate-fade-in:nth-child(3) { animation-delay: 0.1s; }
+.animate-fade-in:nth-child(4) { animation-delay: 0.15s; }
+.animate-fade-in:nth-child(5) { animation-delay: 0.20s; }
+.animate-fade-in:nth-child(6) { animation-delay: 0.25s; }
+.animate-fade-in:nth-child(7) { animation-delay: 0.30s; }
+.animate-fade-in:nth-child(8) { animation-delay: 0.35s; }
+.animate-fade-in:nth-child(9) { animation-delay: 0.40s; }
+.animate-fade-in:nth-child(10) { animation-delay: 0.45s; }
+.animate-fade-in:nth-child(11) { animation-delay: 0.50s; }
+.animate-fade-in:nth-child(12) { animation-delay: 0.55s; }
+.animate-fade-in:nth-child(13) { animation-delay: 0.60s; }
+.animate-fade-in:nth-child(14) { animation-delay: 0.65s; }
+.animate-fade-in:nth-child(15) { animation-delay: 0.70s; }
+.animate-fade-in:nth-child(16) { animation-delay: 0.75s; }
+.animate-fade-in:nth-child(17) { animation-delay: 0.80s; }
+.animate-fade-in:nth-child(18) { animation-delay: 0.85s; }
+.animate-fade-in:nth-child(19) { animation-delay: 0.90s; }
+.animate-fade-in:nth-child(20) { animation-delay: 0.95s; }

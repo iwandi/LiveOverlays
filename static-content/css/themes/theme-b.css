@@ -1,0 +1,20 @@
+:root {
+  --theme-bg: linear-gradient(145deg, #d61f2a 0%, #991822 40%, #111111 100%);
+  --theme-surface: rgba(0, 0, 0, 0.68);
+  --theme-surface-2: rgba(32, 32, 32, 0.82);
+  --theme-border: #f7f7f7;
+  --theme-text: #ffffff;
+  --theme-muted: #ececec;
+  --theme-highlight: #ffffff;
+}
+
+.event-shell {
+  border-radius: 10px;
+}
+
+.event-top,
+.card,
+.event-hero,
+.badge {
+  border-radius: 8px;
+}

@@ -6,26 +6,25 @@
 }
 
 :root {
-    --colorOlympicBlue: #0081c8;
-    --colorOlympicYellow: #f4c300;
-    --colorOlympicBlack: #000000;
-    --colorOlympicGreen: #009f3d;
-    --colorOlympicRed: #df0024;
+    --colorF1Red: #e10600;
+    --colorF1RedDark: #770400;
+    --colorF1Black: #0c0c0c;
+    --colorF1Graphite: #262626;
 
-    --foregroundColor: #ffffff;
-    --backgroundColor: #005f9e;
+    --foregroundColor: #f7f7f7;
+    --backgroundColor: #2b2b2b;
 
-    --bgEuroBlue: linear-gradient(100deg, #006bad 0%, #008ad6 45%, #006bad 100%);
-    --borderEuroBlue: 2px solid rgba(255, 255, 255, 0.95);
-    --shadowEuroBlue: 0 8px 20px rgba(0, 0, 0, 0.45);
+    --bgEuroBlue: linear-gradient(95deg, #151515 0%, #2d2d2d 50%, #151515 100%);
+    --borderEuroBlue: 2px solid rgba(255, 255, 255, 0.78);
+    --shadowEuroBlue: 0 10px 24px rgba(0, 0, 0, 0.66);
 
-    --bgMGPandEuro: linear-gradient(90deg, #0081c8 0%, #0081c8 22%, #f4c300 22%, #f4c300 40%, #000000 40%, #000000 58%, #009f3d 58%, #009f3d 76%, #df0024 76%, #df0024 100%);
-    --borderMGPandEuro: 2px solid rgba(255, 255, 255, 0.95);
-    --shadowMGPandEuro: 0 8px 20px rgba(0, 0, 0, 0.45);
+    --bgMGPandEuro: linear-gradient(95deg, #e10600 0%, #a10400 38%, #121212 60%, #1f1f1f 100%);
+    --borderMGPandEuro: 2px solid rgba(255, 255, 255, 0.75);
+    --shadowMGPandEuro: 0 10px 24px rgba(0, 0, 0, 0.68);
 
-    --bgDark: linear-gradient(95deg, #023f6a 0%, #0668aa 45%, #023f6a 100%);
-    --borderDark: 2px solid rgba(255, 255, 255, 0.55);
-    --shadowDark: 0 8px 20px rgba(0, 0, 0, 0.45);
+    --bgDark: linear-gradient(95deg, #0f0f0f 0%, #2a2a2a 45%, #0f0f0f 100%);
+    --borderDark: 2px solid rgba(255, 255, 255, 0.35);
+    --shadowDark: 0 10px 24px rgba(0, 0, 0, 0.7);
 }
 
 body {
@@ -34,6 +33,7 @@ body {
   width: 100vw;
   font-family: 'Saira Condensed', Arial, sans-serif;
   font-size: 28px;
+  font-style: italic;
   background: transparent;
   display: flex;
   flex-direction: column;
@@ -41,11 +41,11 @@ body {
   align-items: center;
   padding: 20px;
   color: var(--foregroundColor);
-  letter-spacing: 0.4px;
+  letter-spacing: 0.6px;
 }
 
-.logo img { padding-top: 112px; max-height: 218px; height: auto; }
-.subtitle img { max-height: 64px; max-width: 220px; height: auto; width: auto; }
+.logo img { padding-top: 112px; max-height: 214px; height: auto; }
+.subtitle img { max-height: 62px; max-width: 220px; height: auto; width: auto; }
 .subtitle .right { padding-right: 2px; }
 
 .container { text-align: center; padding: 15px; width: 640px; }
@@ -54,7 +54,7 @@ body {
 .title {
   padding: 8px 12px;
   margin-bottom: 10px;
-  border-radius: 16px;
+  border-radius: 3px;
   box-shadow: var(--shadowEuroBlue);
   border: var(--borderEuroBlue);
   background: var(--bgEuroBlue);
@@ -65,7 +65,7 @@ body {
   background: var(--bgMGPandEuro);
   border: var(--borderMGPandEuro);
   box-shadow: var(--shadowMGPandEuro);
-  border-radius: 16px;
+  border-radius: 3px;
   padding: 8px;
   margin-bottom: 10px;
   position: relative;
@@ -82,7 +82,7 @@ body {
   margin-bottom: 10px;
   box-shadow: var(--shadowDark);
   border: var(--borderDark);
-  border-radius: 16px;
+  border-radius: 3px;
   background: var(--bgDark);
 }
 .tabletop div { background: var(--bgDark); }
@@ -93,32 +93,32 @@ td {
   background: var(--bgEuroBlue);
   border: var(--borderEuroBlue);
   box-shadow: var(--shadowEuroBlue);
-  border-radius: 12px;
+  border-radius: 2px;
   padding: 4px 8px;
   text-align: center;
 }
 
 #Nationality { width: 40px; text-align: right; background-size: cover; background-position: center; background-repeat: no-repeat; }
 
-@keyframes fadeIn { from { opacity: 0; transform: translate(5px, 10px); } to { opacity: 1; transform: translate(0, 0); } }
-.animate-fade-in { animation: fadeIn 0.4s ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translate(8px, 0); } to { opacity: 1; transform: translate(0, 0); } }
+.animate-fade-in { animation: fadeIn 0.3s ease-out; }
 .animate-fade-in:nth-child(1) { animation-delay: 0s; }
-.animate-fade-in:nth-child(2) { animation-delay: 0.05s; }
-.animate-fade-in:nth-child(3) { animation-delay: 0.1s; }
-.animate-fade-in:nth-child(4) { animation-delay: 0.15s; }
-.animate-fade-in:nth-child(5) { animation-delay: 0.20s; }
-.animate-fade-in:nth-child(6) { animation-delay: 0.25s; }
-.animate-fade-in:nth-child(7) { animation-delay: 0.30s; }
-.animate-fade-in:nth-child(8) { animation-delay: 0.35s; }
-.animate-fade-in:nth-child(9) { animation-delay: 0.40s; }
-.animate-fade-in:nth-child(10) { animation-delay: 0.45s; }
-.animate-fade-in:nth-child(11) { animation-delay: 0.50s; }
-.animate-fade-in:nth-child(12) { animation-delay: 0.55s; }
-.animate-fade-in:nth-child(13) { animation-delay: 0.60s; }
-.animate-fade-in:nth-child(14) { animation-delay: 0.65s; }
-.animate-fade-in:nth-child(15) { animation-delay: 0.70s; }
-.animate-fade-in:nth-child(16) { animation-delay: 0.75s; }
-.animate-fade-in:nth-child(17) { animation-delay: 0.80s; }
-.animate-fade-in:nth-child(18) { animation-delay: 0.85s; }
-.animate-fade-in:nth-child(19) { animation-delay: 0.90s; }
-.animate-fade-in:nth-child(20) { animation-delay: 0.95s; }
+.animate-fade-in:nth-child(2) { animation-delay: 0.03s; }
+.animate-fade-in:nth-child(3) { animation-delay: 0.06s; }
+.animate-fade-in:nth-child(4) { animation-delay: 0.09s; }
+.animate-fade-in:nth-child(5) { animation-delay: 0.12s; }
+.animate-fade-in:nth-child(6) { animation-delay: 0.15s; }
+.animate-fade-in:nth-child(7) { animation-delay: 0.18s; }
+.animate-fade-in:nth-child(8) { animation-delay: 0.21s; }
+.animate-fade-in:nth-child(9) { animation-delay: 0.24s; }
+.animate-fade-in:nth-child(10) { animation-delay: 0.27s; }
+.animate-fade-in:nth-child(11) { animation-delay: 0.30s; }
+.animate-fade-in:nth-child(12) { animation-delay: 0.33s; }
+.animate-fade-in:nth-child(13) { animation-delay: 0.36s; }
+.animate-fade-in:nth-child(14) { animation-delay: 0.39s; }
+.animate-fade-in:nth-child(15) { animation-delay: 0.42s; }
+.animate-fade-in:nth-child(16) { animation-delay: 0.45s; }
+.animate-fade-in:nth-child(17) { animation-delay: 0.48s; }
+.animate-fade-in:nth-child(18) { animation-delay: 0.51s; }
+.animate-fade-in:nth-child(19) { animation-delay: 0.54s; }
+.animate-fade-in:nth-child(20) { animation-delay: 0.57s; }

@@ -6,26 +6,26 @@
 }
 
 :root {
-    --colorMGPRed: #d3202a;
-    --colorMGPRedDark: #95161d;
-    --colorDark: #0b0b0b;
-    --colorDarkLight: #252525;
-    --colorWhite: #ffffff;
+    --colorOlympicBlue: #0081c8;
+    --colorOlympicYellow: #f4c300;
+    --colorOlympicBlack: #000000;
+    --colorOlympicGreen: #009f3d;
+    --colorOlympicRed: #df0024;
 
     --foregroundColor: #ffffff;
-    --backgroundColor: #d3202a;
+    --backgroundColor: #005f9e;
 
-    --bgEuroBlue: linear-gradient(95deg, #131313 0%, #242424 45%, #131313 100%);
-    --borderEuroBlue: 2px solid rgba(255, 255, 255, 0.9);
-    --shadowEuroBlue: 0 8px 20px rgba(0, 0, 0, 0.6);
+    --bgEuroBlue: linear-gradient(100deg, #006bad 0%, #008ad6 45%, #006bad 100%);
+    --borderEuroBlue: 2px solid rgba(255, 255, 255, 0.95);
+    --shadowEuroBlue: 0 8px 20px rgba(0, 0, 0, 0.45);
 
-    --bgMGPandEuro: linear-gradient(95deg, #d3202a 0%, #95161d 38%, #131313 70%, #0b0b0b 100%);
-    --borderMGPandEuro: 2px solid rgba(255, 255, 255, 0.85);
-    --shadowMGPandEuro: 0 8px 20px rgba(0, 0, 0, 0.6);
+    --bgMGPandEuro: linear-gradient(90deg, #0081c8 0%, #0081c8 22%, #f4c300 22%, #f4c300 40%, #000000 40%, #000000 58%, #009f3d 58%, #009f3d 76%, #df0024 76%, #df0024 100%);
+    --borderMGPandEuro: 2px solid rgba(255, 255, 255, 0.95);
+    --shadowMGPandEuro: 0 8px 20px rgba(0, 0, 0, 0.45);
 
-    --bgDark: linear-gradient(95deg, #0a0a0a 0%, #1f1f1f 45%, #0a0a0a 100%);
-    --borderDark: 2px solid rgba(255, 255, 255, 0.38);
-    --shadowDark: 0 8px 20px rgba(0, 0, 0, 0.65);
+    --bgDark: linear-gradient(95deg, #023f6a 0%, #0668aa 45%, #023f6a 100%);
+    --borderDark: 2px solid rgba(255, 255, 255, 0.55);
+    --shadowDark: 0 8px 20px rgba(0, 0, 0, 0.45);
 }
 
 body {
@@ -44,7 +44,7 @@ body {
   letter-spacing: 0.4px;
 }
 
-.logo img { padding-top: 115px; max-height: 220px; height: auto; }
+.logo img { padding-top: 112px; max-height: 218px; height: auto; }
 .subtitle img { max-height: 64px; max-width: 220px; height: auto; width: auto; }
 .subtitle .right { padding-right: 2px; }
 
@@ -54,7 +54,7 @@ body {
 .title {
   padding: 8px 12px;
   margin-bottom: 10px;
-  border-radius: 6px;
+  border-radius: 16px;
   box-shadow: var(--shadowEuroBlue);
   border: var(--borderEuroBlue);
   background: var(--bgEuroBlue);
@@ -65,7 +65,7 @@ body {
   background: var(--bgMGPandEuro);
   border: var(--borderMGPandEuro);
   box-shadow: var(--shadowMGPandEuro);
-  border-radius: 6px;
+  border-radius: 16px;
   padding: 8px;
   margin-bottom: 10px;
   position: relative;
@@ -82,7 +82,7 @@ body {
   margin-bottom: 10px;
   box-shadow: var(--shadowDark);
   border: var(--borderDark);
-  border-radius: 6px;
+  border-radius: 16px;
   background: var(--bgDark);
 }
 .tabletop div { background: var(--bgDark); }
@@ -93,7 +93,7 @@ td {
   background: var(--bgEuroBlue);
   border: var(--borderEuroBlue);
   box-shadow: var(--shadowEuroBlue);
-  border-radius: 4px;
+  border-radius: 12px;
   padding: 4px 8px;
   text-align: center;
 }
